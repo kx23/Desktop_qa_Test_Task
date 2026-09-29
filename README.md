@@ -67,24 +67,11 @@ pytest -m critical                       # только критичные
 pytest --html=reports/report.html --self-contained-html   # HTML-отчёт
 ```
 
-Симулятор запускается автоматически отдельным процессом на порту 2001 и останавливается по завершении сессии.
-
-Запуск с **настоящим** симулятором:
-
-```bash
-# Linux/macOS
-USE_EXTERNAL_SERVICE=1 SERVICE_PORT=2001 pytest
-# Windows PowerShell
-$env:USE_EXTERNAL_SERVICE="1"; pytest
-```
-
-Переменные окружения: `SERVICE_HOST`, `SERVICE_PORT`, `USE_EXTERNAL_SERVICE`, `CONNECT_TIMEOUT`, `READ_TIMEOUT`, `EXPECTED_SIGNAL_COUNT`, `MAX_TIMESTAMP_AGE_SEC`.
-
 ## 5. Что проверяют автотесты
 
 | Тест | Что проверяет                                                                                                       |
 |------|---------------------------------------------------------------------------------------------------------------------|
-| `test_connect_receives_full_valid_signal_set` | Критичный сценарий: 10 сигналов, уникальные ID, имена, конечные значения, допустимое качество, свежая метка времени |
+| `test_connect_receives_full_valid_signal_set` | Критичный сценарий: Подключение при доступном сервисе: после подключения в таблице появляются все 10 сигналов |
 | `test_signal_values_change_between_updates` | Ручное обновление возвращает тот же набор ID, значения корректные                                                   |
 | `test_connect_to_unavailable_port_fails_fast` | Недоступный сервис даёт понятную ошибку, а не зависание                                                             |
 
